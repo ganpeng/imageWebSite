@@ -3,15 +3,20 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/libs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css"> {% block css %} {% endblock %}
+    <!-- <link rel="stylesheet" type="text/css" href="/libs/bootstrap/dist/css/bootstrap.min.css"> -->
+    <meta name="viewport" content="width=device-width initial-scale=1.0 user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="/libs/material-design-lite/material.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+    {% block css %} {% endblock %}
     <title>{{ title }}</title>
 </head>
 
 <body>
     {% block body %} {% endblock %}
     <script type="text/javascript" src="/libs/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="/libs/material-design-lite/material.min.js"></script>
     <script type="text/javascript" src="/js/mylib.min.js"></script>
     {% block script %} {% endblock %}
 </body>

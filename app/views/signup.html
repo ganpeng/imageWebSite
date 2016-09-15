@@ -1,6 +1,51 @@
 {% extends "layout/layout.html" %}
 
 {% block body %}
+
+<div class="login mdl-layout__content">
+    <div class="mdl-grid login-grid">
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet">
+        <div class="errorMessage">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %} {% endif %}
+        </div>
+
+            <form class="form-horizontal" method="POST" action="/signUp">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="email" name="email">
+                    <label class="mdl-textfield__label" for="email">邮箱</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="username" name="username">
+                    <label class="mdl-textfield__label" for="username">用户名</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" id="password" name="password">
+                    <label class="mdl-textfield__label" for="password">密码</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="password" id="confirmPassword" name="confirmPassword">
+                    <label class="mdl-textfield__label" for="confirmPassword">确认密码</label>
+                </div>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" id="submitBtn">
+                   注册 
+                </button>
+                <span class="with-account">
+                    已经有账号了?
+                    <a href="/login">登录</a>
+                </span>
+            </form>
+
+      </div>
+    </div>
+</div>
+
+<!--
     <div class="signUp">
         <div class="row">
         	<div class="errorMessage">
@@ -78,6 +123,7 @@
             </form>
         </div>
     </div>
+-->
 {% endblock %}
 {% block script %}
 <script type="text/javascript">

@@ -1,48 +1,115 @@
-@charset "UTF-8";
-/*
-	注册页面
- */
-/* line 9, ../sass/style.scss */
-body {
-  background-color: #1E824C;
-  min-height: 200px;
+/* line 5, ../sass/style.scss */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
-/* line 15, ../sass/style.scss */
-li {
-  list-style: none;
+/* line 12, ../sass/style.scss */
+.index-grid .mdl-cell {
+  box-sizing: border-box;
+  background-color: #BDBDBD;
+  padding-left: 8px;
+  padding-top: 4px;
+  color: white;
+  cursor: pointer;
 }
-
 /* line 20, ../sass/style.scss */
-.signUp, .login {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  width: 500px;
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
+.index-grid .mdl-cell:hover > .tag-mask, .index-grid .mdl-cell:hover > .tag-title {
+  display: block;
 }
-
-/* line 31, ../sass/style.scss */
-.table-wrapper > h2 {
-  padding: 10px 10px;
+/* line 25, ../sass/style.scss */
+.index-grid .tags-item {
+  position: relative;
 }
-
+/* line 28, ../sass/style.scss */
+.index-grid .tag-mask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
 /* line 37, ../sass/style.scss */
-.header {
-  display: table-cell;
-  width: 80%;
-  height: 80px;
-  margin: 0 auto;
+.index-grid .tag-title {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #000;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
-/* line 44, ../sass/style.scss */
-a {
-  text-decoration: none;
+/* line 51, ../sass/style.scss */
+.login-grid {
+  max-width: 420px;
+  margin: 200px auto 0;
+  border: 1px solid #dfdfdf;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
-/* line 46, ../sass/style.scss */
-a.signLink {
+/* line 56, ../sass/style.scss */
+.login-grid .mdl-cell {
+  padding: 60px;
+}
+
+/* line 61, ../sass/style.scss */
+.login {
+  width: 100%;
+}
+
+/* line 66, ../sass/style.scss */
+.without-account,
+.with-account {
+  float: right;
+  line-height: 36px;
+}
+
+/* line 73, ../sass/style.scss */
+#menu-list .menu-item {
+  color: #999;
+}
+
+/* line 78, ../sass/style.scss */
+.table-list {
+  width: 80%;
+}
+/* line 80, ../sass/style.scss */
+.table-list th,
+.table-list td {
+  text-align: center;
+}
+
+/* line 87, ../sass/style.scss */
+.upload-image-dialog {
+  width: 480px;
+}
+
+/* line 92, ../sass/style.scss */
+.logo-image {
+  display: inline-block;
+}
+/* line 94, ../sass/style.scss */
+.logo-image img {
+  width: 100px;
+  height: 51px;
+}
+
+/* line 100, ../sass/style.scss */
+.mdl-list__item.active {
+  background-color: #ff4081;
+}
+/* line 102, ../sass/style.scss */
+.mdl-list__item.active a {
+  color: #fff;
+}
+/* line 105, ../sass/style.scss */
+.mdl-list__item.active i {
   color: #fff;
 }

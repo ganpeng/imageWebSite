@@ -4,8 +4,10 @@ const config = require('./')
 const path = require('path')
 const uuid = require('node-uuid')
 
+const index = require(path.join(config.root, 'app/controllers/index'))
 const user = require(path.join(config.root, 'app/controllers/user'))
 const image = require(path.join(config.root, 'app/controllers/image'))
+const tag = require(path.join(config.root, 'app/controllers/tag'))
 const auth = require('./middleware/userAuth')
 
 
@@ -42,7 +44,10 @@ module.exports = (app, passport) => {
 
 	const pauth = passport.authenticate.bind(passport);
 
-	app.get('/', user.index)
+	app.get('/', index.index)
+
+
+	// auth Router
 
 	app.get('/login', user.showLogin)
 
@@ -115,10 +120,16 @@ module.exports = (app, passport) => {
 
 	app.get('/logout', user.logout)
 
+
+	// user Router
+
 	app.get('/admin/user/list', auth.isLogedIn, auth.isAdmin, user.userList)
 
 	app.get('/admin/user/delete/:id', auth.isLogedIn, auth.isAdmin, user.deleteUser)
 
+
+
+	// image Router
 
 	app.get('/image/list', auth.isLogedIn, image.list)
 
@@ -130,4 +141,12 @@ module.exports = (app, passport) => {
 
     app.get('/images', image.images)
 
+
+    // tag Router
+
+    app.get('/tag/list', auth.isLogedIn, auth.isAdmin, tag.tagList)
+
+    app.route('/tag/create')  
+        .post(upload.single('imagefile'), tag.createTag)
+    app.get('/tag/delete/:id', auth.isLogedIn, tag.tagDelete)
 }

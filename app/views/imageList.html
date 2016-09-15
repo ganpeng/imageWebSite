@@ -1,67 +1,119 @@
 {% extends "layout/layout.html" %} 
 
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="/libs/dialog-polyfill/dialog-polyfill.css">
+{% endblock %}
+
 
 {% block body %}
 
 	{% include "include/header.html" %}
 
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-3">
-	        	{% include "include/tab.html" %}
-	        </div>
-	        <div class="col-md-9">
-	        	<button class="btn btn-success" data-toggle="modal" data-target="#myModal">添加图片</button>
-				<div class="table-wrapper">
-					<h2 class="bg-primary">图片列表</h2>
-					<table class="table bordered">
-						<thead>
-							<tr>
-								<th>
-									图片名称
-								</th>
-								<th>
-									图片描述
-								</th>
-								<th>
-									缩略图
-								</th>
-								<th>
-									上传时间
-								</th>
-								<th>
-									操作
-								</th>
-							</tr>	
-						</thead>
-						<tbody>
-							{% if images %}
-								{% for image in images %}
-									<tr>
-										<td>
-											{{ image.title }}
-										</td>
-										<td>
-											{{ image.desc }}
-										</td>
-										<td>
-											<img src="/upload/{{ image.url }}" width=50 height=50>
-										</td>
-										<td>
-											{{  moment(image.createAt).format('YYYY-MM-DD') }}
-										</td>
-										<td>
-											<a href="/image/delete/{{ image._id }}" class="btn btn-danger">删除</a>
-										</td>
-									</tr>
-								{% endfor %}
-							{% endif %}
-						</tbody>
-					</table>
-				</div>
-	        </div>
-	    </div>
-	</div>
+    <div class="mdl-grid">
+		<div class="mdl-cell mdl-cell--2-col">
+        	{% include "include/tab.html" %}
+		</div>
+		<div class="mdl-cell mdl-cell--10-col">
+			
+			<div class="table-wrapper">
+				<h4 class="bg-primary">图片列表</h4>
+				<button id="show-dialog" type="button" class="mdl-button">添加图片</button>
+				<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table-list">
+					<thead>
+						<tr>
+						    <th class="mdl-data-table__cell--non-numeric">
+								图片名称
+							</th>
+							<th>
+								图片描述
+							</th>
+							<th>
+								缩略图
+							</th>
+							<th>
+								上传时间
+							</th>
+							<th>
+								操作
+							</th>
+						</tr>	
+					</thead>
+					<tbody>
+						{% if images %}
+							{% for image in images %}
+								<tr>
+									<td class="mdl-data-table__cell--non-numeric">
+										{{ image.title }}
+									</td>
+									<td>
+										{{ image.desc }}
+									</td>
+									<td>
+										<img src="/upload/{{ image.url }}" width=50 height=50>
+									</td>
+									<td>
+										{{  moment(image.createAt).format('YYYY-MM-DD') }}
+									</td>
+									<td>
+										<a href="/image/delete/{{ image._id }}" class="btn btn-danger">删除</a>
+									</td>
+								</tr>
+							{% endfor %}
+						{% endif %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+    </div>
 
-	{% include "include/addImageModal.html" %}
+  	<dialog class="mdl-dialog upload-image-dialog">
+	    <h4 class="mdl-dialog__title">图片上传</h4>
+	    <div class="mdl-dialog__content">
+            <form action="/image/create" role="form" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="creator" value="{{ user._id }}">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="title" name="title">
+                    <label class="mdl-textfield__label" for="title">图片名称</label>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="desc" name="desc">
+                    <label class="mdl-textfield__label" for="desc">图片描述</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="file" id="imagefile" name="imagefile">
+                    <label class="mdl-textfield__label" for="imagefile"></label>
+                </div>
+			    <div class="mdl-dialog__actions">
+			      	<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">上传</button>
+			      	<button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent close">关闭</button>
+			    </div>
+            </form>
+	    </div>
+  	</dialog>
+
+	{% block script %}
+
+
+	<script type="text/javascript" src="/libs/dialog-polyfill/dialog-polyfill.js"></script>	
+	<script type="text/javascript">
+		
+	    var dialog = document.querySelector('dialog');
+	    var showDialogButton = document.querySelector('#show-dialog');
+	    dialogPolyfill.registerDialog(dialog);
+	    // if (! dialog.showModal) {
+	    //   dialogPolyfill.registerDialog(dialog);
+	    // }
+	    showDialogButton.addEventListener('click', function() {
+	      dialog.showModal();
+	    });
+	    dialog.querySelector('.close').addEventListener('click', function() {
+	      dialog.close();
+	    });
+
+
+	</script>
+
+	{% endblock %}
+
 {% endblock %}

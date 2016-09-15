@@ -1,51 +1,108 @@
 @import "compass";
 @import "compass/css3";
 
-
-/*
-	注册页面
- */
-
-body {
-	background-color:#1E824C;
-	// color:#fff;
-	min-height:200px;
-}
-
-li {
-	list-style:none;
+//  chrome input 背景
+input:-webkit-autofill {
+-webkit-box-shadow: 0 0 0px 1000px white inset;
+// border: 1px solid #CCC!important;
 }
 
 
-.signUp, .login {
-	position:fixed;
-	top:20%;
-	left:50%;
-	width:500px;
-	@include transform(translateX(-50%));
-}
-
-.table-wrapper {
-	// width:60%;
-	// margin:40px auto 0;
-	> h2 {
-		padding:10px 10px;
+.index-grid {
+	.mdl-cell {
+	  box-sizing: border-box;
+	  background-color: #BDBDBD;
+	  // height: 200px;
+	  padding-left: 8px;
+	  padding-top: 4px;
+	  color: white;
+	  cursor:pointer;
+	  &:hover > .tag-mask,
+	  &:hover > .tag-title {
+	  	display:block;
+	  }
+	}
+	.tags-item {
+		position:relative;
+	}
+	.tag-mask {
+		display:none;
+		position:absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		background-color:rgba(0, 0, 0, 0.6);
+	}
+	.tag-title {
+		display:none;
+		position:absolute;
+		top:50%;
+		left:50%;
+		padding:10px 20px;
+		background-color:#fff;
+		color:#000;
+		@include transform(translate(-50%, -50%));	
 	}
 }
 
 
-.header {
-	display:table-cell;
-	width:80%;
-	height:80px;
-	margin:0 auto;
+
+.login-grid {
+	max-width:420px;
+	margin:200px auto 0;
+	border:1px solid #dfdfdf;
+	@include border-radius(5px);
+	.mdl-cell {
+		padding:60px;
+	}
 }
 
-a {
-	text-decoration:none;
-	&.signLink {
+.login {
+	width:100%;
+}
+
+
+.without-account,
+.with-account {
+	float:right;
+	line-height:36px;
+}
+
+#menu-list {
+	.menu-item {
+		color:#999;
+	}
+}
+
+.table-list {
+	width:80%;
+	th,
+	td {
+		text-align:center;
+	}
+}
+
+
+.upload-image-dialog {
+	width:480px;
+}
+
+
+.logo-image {
+	display:inline-block;
+	img {
+		width:100px;
+		height:51px;
+	}
+}
+
+.mdl-list__item.active {
+	background-color:#ff4081;
+	a {
+		color:#fff;
+	}
+	i {
 		color:#fff;
 	}
 }
-
-

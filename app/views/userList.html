@@ -5,39 +5,38 @@
 
 	{% include "include/header.html" %}
 
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-3">
-	        	{% include "include/tab.html" %}
-	        </div>
-	        <div class="col-md-9">
-				<div class="table-wrapper">
-					<h2 class="bg-primary">用户列表</h2>
-					<table class="table bordered">
-						<thead>
-							<tr>
-								<th>
-									用户名
-								</th>
-								<th>
-									邮箱
-								</th>
-								<th>
-									角色
-								</th>
-								<th>
-									注册时间
-								</th>
-								<th>
-									操作
-								</th>
-							</tr>	
-						</thead>
-						<tbody>
+    <div class="mdl-grid">
+		<div class="mdl-cell mdl-cell--2-col">
+        	{% include "include/tab.html" %}
+		</div>
+		<div class="mdl-cell mdl-cell--10-col">
+			<div class="table-wrapper">
+				<h4 class="bg-primary">用户列表</h4>
+				<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table-list">
+					<thead>
+					    <tr>
+					    <th class="mdl-data-table__cell--non-numeric">
+					     	用户名
+					    </th>
+						<th>
+							邮箱
+						</th>
+						<th>
+							角色
+						</th>
+						<th>
+							注册时间
+						</th>
+						<th>
+							操作
+						</th>
+					    </tr>
+					</thead>
+					<tbody>
 							{% if users %}		
 								{% for user in users %}
 									<tr>
-										<td>{{ user.username }}</td>
+										<td class="mdl-data-table__cell--non-numeric">{{ user.username }}</td>
 										<td>{{ user.email }}</td>
 										<td>{{ '普通户用' if (user.role == 0) else '管理员' }}</td>
 										<td>{{ moment(user.createAt).format('YYYY-MM-DD') }}</td>
@@ -49,11 +48,10 @@
 									</tr>
 								{% endfor %}
 							{% endif %}
-						</tbody>
-					</table>
-				</div>
-	        </div>
-	    </div>
-	</div>
+					</tbody>
+				</table>
+			</div>			
+		</div>
+    </div>
 
 {% endblock %}
