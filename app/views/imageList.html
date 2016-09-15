@@ -81,6 +81,16 @@
                     <label class="mdl-textfield__label" for="desc">图片描述</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                	<select name="tag" id="tag">
+                		{% if tags %}
+                			{% for tag in tags %}
+                				<option value="{{ tag._id }}">{{ tag.title }}</option>
+                			{% endfor %}
+                		{% endif %}
+                	</select>
+                    <label class="mdl-textfield__label" for="tag"></label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="file" id="imagefile" name="imagefile">
                     <label class="mdl-textfield__label" for="imagefile"></label>
                 </div>

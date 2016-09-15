@@ -2,6 +2,7 @@
 
 
 const mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
 const Promise  = require('bluebird')
 const bcrypt = require('bcryptjs')
 

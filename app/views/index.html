@@ -16,12 +16,15 @@
     <!-- Your content goes here -->
 		<div class="mdl-grid index-grid">
 		{% if tags %}
-			{% for tag in tags %}
+			{% for index in range(tags.length) %}
 				<div class="mdl-cell mdl-cell--4-col tags-item">
-					<img src="/upload/{{ tag.poster }}" style="width:100%;height:auto;">
+					<img src="/upload/{{ tags[index].poster }}" style="width:100%;height:auto;">
 					<div class="tag-mask"></div>
 					<span class="tag-title">
-						{{ tag.title }}
+						{{ tags[index].title }}
+					</span>
+					<span class="tag-count">
+						图片数：<em>{{ tagCount[index] }}</em>
 					</span>
 				</div>
 			{% endfor %}

@@ -1,6 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
@@ -27,6 +28,11 @@ const ImageSchema = new Schema({
 		type : String,
 		// required : true,
 		trim : true
+	},
+
+	tag : {
+		type : Schema.Types.ObjectId,
+		ref : 'Tag'
 	},
 
 	createAt : {

@@ -18,7 +18,8 @@ input:-webkit-autofill {
 	  color: white;
 	  cursor:pointer;
 	  &:hover > .tag-mask,
-	  &:hover > .tag-title {
+	  &:hover > .tag-title,
+	  &:hover > .tag-count {
 	  	display:block;
 	  }
 	}
@@ -43,6 +44,16 @@ input:-webkit-autofill {
 		background-color:#fff;
 		color:#000;
 		@include transform(translate(-50%, -50%));	
+	}
+	.tag-count {
+		display:none;
+		position:absolute;
+		top:20px;
+		right:20px;
+		color:#fff;
+		> em {
+			color:#ff4081;
+		}
 	}
 }
 

@@ -1,6 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
 const Schema = mongoose.Schema
 const config = require('../../config')
 const path = require('path')

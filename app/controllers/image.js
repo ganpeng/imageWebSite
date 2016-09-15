@@ -6,17 +6,20 @@ const exists = Promise.promisify(fs.exists);
 const co = require('co')
 
 const Image = require('../models/image')
+const Tag = require('../models/tag')
 
 exports.list = (req, res) => {
 
 	co(function*() {
 
-		let images = yield Image.find({ creator : req.user._id }).exec()
+		let images = yield Image.find({ creator : req.user._id }).exec(),
+			tags = yield Tag.find({}).exec()
 
 		res.render('imageList.html', {
 			user : req.user,
 			flag : 'imageList',
-			images : images
+			images : images,
+			tags : tags
 		})	
 
 	})
@@ -35,6 +38,7 @@ exports.createImage = (req, res) => {
 		image.creator = req.body.creator
 		image.title = req.body.title
 		image.desc = req.body.desc
+		image.tag = req.body.tag
 		image.url = req.file.filename
 
 		yield image.save()

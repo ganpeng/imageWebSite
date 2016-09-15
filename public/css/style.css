@@ -13,14 +13,14 @@ input:-webkit-autofill {
   cursor: pointer;
 }
 /* line 20, ../sass/style.scss */
-.index-grid .mdl-cell:hover > .tag-mask, .index-grid .mdl-cell:hover > .tag-title {
+.index-grid .mdl-cell:hover > .tag-mask, .index-grid .mdl-cell:hover > .tag-title, .index-grid .mdl-cell:hover > .tag-count {
   display: block;
 }
-/* line 25, ../sass/style.scss */
+/* line 26, ../sass/style.scss */
 .index-grid .tags-item {
   position: relative;
 }
-/* line 28, ../sass/style.scss */
+/* line 29, ../sass/style.scss */
 .index-grid .tag-mask {
   display: none;
   position: absolute;
@@ -30,7 +30,7 @@ input:-webkit-autofill {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.6);
 }
-/* line 37, ../sass/style.scss */
+/* line 38, ../sass/style.scss */
 .index-grid .tag-title {
   display: none;
   position: absolute;
@@ -44,8 +44,20 @@ input:-webkit-autofill {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+/* line 48, ../sass/style.scss */
+.index-grid .tag-count {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+}
+/* line 54, ../sass/style.scss */
+.index-grid .tag-count > em {
+  color: #ff4081;
+}
 
-/* line 51, ../sass/style.scss */
+/* line 62, ../sass/style.scss */
 .login-grid {
   max-width: 420px;
   margin: 200px auto 0;
@@ -54,62 +66,62 @@ input:-webkit-autofill {
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 56, ../sass/style.scss */
+/* line 67, ../sass/style.scss */
 .login-grid .mdl-cell {
   padding: 60px;
 }
 
-/* line 61, ../sass/style.scss */
+/* line 72, ../sass/style.scss */
 .login {
   width: 100%;
 }
 
-/* line 66, ../sass/style.scss */
+/* line 77, ../sass/style.scss */
 .without-account,
 .with-account {
   float: right;
   line-height: 36px;
 }
 
-/* line 73, ../sass/style.scss */
+/* line 84, ../sass/style.scss */
 #menu-list .menu-item {
   color: #999;
 }
 
-/* line 78, ../sass/style.scss */
+/* line 89, ../sass/style.scss */
 .table-list {
   width: 80%;
 }
-/* line 80, ../sass/style.scss */
+/* line 91, ../sass/style.scss */
 .table-list th,
 .table-list td {
   text-align: center;
 }
 
-/* line 87, ../sass/style.scss */
+/* line 98, ../sass/style.scss */
 .upload-image-dialog {
   width: 480px;
 }
 
-/* line 92, ../sass/style.scss */
+/* line 103, ../sass/style.scss */
 .logo-image {
   display: inline-block;
 }
-/* line 94, ../sass/style.scss */
+/* line 105, ../sass/style.scss */
 .logo-image img {
   width: 100px;
   height: 51px;
 }
 
-/* line 100, ../sass/style.scss */
+/* line 111, ../sass/style.scss */
 .mdl-list__item.active {
   background-color: #ff4081;
 }
-/* line 102, ../sass/style.scss */
+/* line 113, ../sass/style.scss */
 .mdl-list__item.active a {
   color: #fff;
 }
-/* line 105, ../sass/style.scss */
+/* line 116, ../sass/style.scss */
 .mdl-list__item.active i {
   color: #fff;
 }
