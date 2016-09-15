@@ -1,0 +1,67 @@
+{% extends "layout/layout.html" %} 
+
+
+{% block body %}
+
+	{% include "include/header.html" %}
+
+	<div class="container">
+	    <div class="row">
+	        <div class="col-md-3">
+	        	{% include "include/tab.html" %}
+	        </div>
+	        <div class="col-md-9">
+	        	<button class="btn btn-success" data-toggle="modal" data-target="#myModal">添加图片</button>
+				<div class="table-wrapper">
+					<h2 class="bg-primary">图片列表</h2>
+					<table class="table bordered">
+						<thead>
+							<tr>
+								<th>
+									图片名称
+								</th>
+								<th>
+									图片描述
+								</th>
+								<th>
+									缩略图
+								</th>
+								<th>
+									上传时间
+								</th>
+								<th>
+									操作
+								</th>
+							</tr>	
+						</thead>
+						<tbody>
+							{% if images %}
+								{% for image in images %}
+									<tr>
+										<td>
+											{{ image.title }}
+										</td>
+										<td>
+											{{ image.desc }}
+										</td>
+										<td>
+											<img src="/upload/{{ image.url }}" width=50 height=50>
+										</td>
+										<td>
+											{{  moment(image.createAt).format('YYYY-MM-DD') }}
+										</td>
+										<td>
+											<a href="/image/delete/{{ image._id }}" class="btn btn-danger">删除</a>
+										</td>
+									</tr>
+								{% endfor %}
+							{% endif %}
+						</tbody>
+					</table>
+				</div>
+	        </div>
+	    </div>
+	</div>
+
+	{% include "include/addImageModal.html" %}
+{% endblock %}

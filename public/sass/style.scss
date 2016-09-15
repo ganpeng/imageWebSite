@@ -1,0 +1,51 @@
+@import "compass";
+@import "compass/css3";
+
+
+/*
+	注册页面
+ */
+
+body {
+	background-color:#1E824C;
+	// color:#fff;
+	min-height:200px;
+}
+
+li {
+	list-style:none;
+}
+
+
+.signUp, .login {
+	position:fixed;
+	top:20%;
+	left:50%;
+	width:500px;
+	@include transform(translateX(-50%));
+}
+
+.table-wrapper {
+	// width:60%;
+	// margin:40px auto 0;
+	> h2 {
+		padding:10px 10px;
+	}
+}
+
+
+.header {
+	display:table-cell;
+	width:80%;
+	height:80px;
+	margin:0 auto;
+}
+
+a {
+	text-decoration:none;
+	&.signLink {
+		color:#fff;
+	}
+}
+
+

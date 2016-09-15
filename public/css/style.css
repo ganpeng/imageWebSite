@@ -1,0 +1,48 @@
+@charset "UTF-8";
+/*
+	注册页面
+ */
+/* line 9, ../sass/style.scss */
+body {
+  background-color: #1E824C;
+  min-height: 200px;
+}
+
+/* line 15, ../sass/style.scss */
+li {
+  list-style: none;
+}
+
+/* line 20, ../sass/style.scss */
+.signUp, .login {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  width: 500px;
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+/* line 31, ../sass/style.scss */
+.table-wrapper > h2 {
+  padding: 10px 10px;
+}
+
+/* line 37, ../sass/style.scss */
+.header {
+  display: table-cell;
+  width: 80%;
+  height: 80px;
+  margin: 0 auto;
+}
+
+/* line 44, ../sass/style.scss */
+a {
+  text-decoration: none;
+}
+/* line 46, ../sass/style.scss */
+a.signLink {
+  color: #fff;
+}
