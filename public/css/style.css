@@ -60,7 +60,7 @@ input:-webkit-autofill {
 /* line 62, ../sass/style.scss */
 .login-grid {
   max-width: 420px;
-  margin: 200px auto 0;
+  margin: 0 auto;
   border: 1px solid #dfdfdf;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
