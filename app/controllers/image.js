@@ -4,6 +4,7 @@ const fs = require('fs');
 const unlink = Promise.promisify(fs.unlink);
 const exists = Promise.promisify(fs.exists);
 const co = require('co')
+const sizeOf = require('image-size');
 
 const Image = require('../models/image')
 const Tag = require('../models/tag')
@@ -33,13 +34,16 @@ exports.list = (req, res) => {
 
 exports.createImage = (req, res) => {
 	co(function*() {
-		let image = new Image()
+		let image = new Image(),
+			relateUrl = `${__dirname}/../../public/upload/${req.file.filename}`
 
 		image.creator = req.body.creator
 		image.title = req.body.title
 		image.desc = req.body.desc
 		image.tag = req.body.tag
 		image.url = req.file.filename
+		image.width = (yield promiseSizeOf(relateUrl)).width
+		image.height = (yield promiseSizeOf(relateUrl)).height
 
 		yield image.save()
 
@@ -101,4 +105,16 @@ function promiseExists(path) {
             resolve(e);
         })
     })
+}
+
+
+function promiseSizeOf(path) {
+	return new Promise((resolve, reject) => {
+		sizeOf(path, (err, dimensions) => {
+			if (err) {
+				reject(err)
+			}
+			resolve(dimensions)
+		})
+	})
 }

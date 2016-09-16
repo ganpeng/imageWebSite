@@ -1,6 +1,8 @@
 {% extends "layout/layout.html" %} 
 
 {% block css %}
+	<link rel="stylesheet" type="text/css" href="/libs/photoswipe/dist/photoswipe.css">
+	<link rel="stylesheet" type="text/css" href="/libs/photoswipe/dist/default-skin/default-skin.css">
 {% endblock %}
 
 
@@ -17,7 +19,7 @@
 		<div class="mdl-grid index-grid">
 		{% if tags %}
 			{% for index in range(tags.length) %}
-				<div class="mdl-cell mdl-cell--4-col tags-item">
+				<div class="mdl-cell mdl-cell--4-col tags-item" data-images='{{ stringify(tagImages[index]) }}' >
 					<img src="/upload/{{ tags[index].poster }}" style="width:100%;height:auto;">
 					<div class="tag-mask"></div>
 					<span class="tag-title">
@@ -33,8 +35,58 @@
     </div>
   </main>
 </div>
+	
+	{% include "include/photoSwipe.html" %}
+
 {% endblock %}
 
 {% block script %}
+	<script type="text/javascript" src="/libs/photoswipe/dist/photoswipe.min.js"></script>
+	<script type="text/javascript" src="/libs/photoswipe/dist/photoswipe-ui-default.min.js"></script>
+	<script type="text/javascript">
+		var pswpElement = document.querySelectorAll('.pswp')[0];
+
+		function initPhotoSwipe(data) {
+			// define options (if needed)
+			var options = {
+			    // optionName: 'option value'
+			    // for example:
+			    index: 0, // start at first slide
+				shareButtons: [
+				    // {id:'facebook', label:'Share on Facebook', url:'https://www.facebook.com/sharer/sharer.php?u={{url}}'},
+				    // {id:'twitter', label:'Tweet', url:'https://twitter.com/intent/tweet?text={{text}}&url={{url}}'},
+				    // {id:'pinterest', label:'Pin it', url:'http://www.pinterest.com/pin/create/button/?url={{url}}&media={{image_url}}&description={{text}}'},
+				    {id:'download', label:'下载图片', url:'{{raw_image_url}}', download:true}
+				],
+			};
+
+			// Initializes and opens PhotoSwipe
+			var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, data, options);
+
+			gallery.init();		
+
+		}
+
+		$('.tags-item').on('click', function() {
+			var images = $(this).data('images')
+
+			if (!images || !images.length || images.length === 0) {
+				return false
+			}
+
+			var items = images.map(function(image) {
+				return {
+					src : '/upload/' + image.url,
+					w : image.width,
+					h : image.height 
+				}
+			})
+
+			console.log(items)
+
+			initPhotoSwipe(items)
+		})
+
+	</script>
 {% endblock %}
 

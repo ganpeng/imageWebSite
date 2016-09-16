@@ -72,5 +72,7 @@ module.exports = (app, passport) => {
 
     // 挂载库
     app.locals.moment = moment
+    app.locals.stringify = JSON.stringify
+    app.locals.parse = JSON.parse
 
 }

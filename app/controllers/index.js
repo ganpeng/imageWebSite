@@ -11,12 +11,17 @@ exports.index = (req, res) => {
 		tagPromiseAll =  tags.map((tag) => {
 			return Image.find({ tag : tag._id}).count().exec()
 		}),
-		tagImagesCount = yield Promise.all(tagPromiseAll)
 
+		tagImages =  yield Promise.all(tags.map((tag) => {
+			return Image.find({ tag : tag._id}).exec()
+		})),
+
+		tagImagesCount = yield Promise.all(tagPromiseAll)
 
 		res.render('index.html', {
 			tags : tags,
 			tagCount : tagImagesCount,
+			tagImages : tagImages,
 			user : req.user,
 			title : '首页'
 		})
