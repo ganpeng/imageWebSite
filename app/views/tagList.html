@@ -2,6 +2,7 @@
 
 {% block css %}
 	<link rel="stylesheet" type="text/css" href="/libs/dialog-polyfill/dialog-polyfill.css">
+    <link rel="stylesheet" type="text/css" href="/libs/notie/dist/notie.css">
 {% endblock %}
 
 
@@ -84,7 +85,7 @@
                     <label class="mdl-textfield__label" for="imagefile"></label>
                 </div>
 			    <div class="mdl-dialog__actions">
-			      	<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">上传</button>
+			      	<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="submitBtn">创建</button>
 			      	<button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent close">关闭</button>
 			    </div>
             </form>
@@ -95,6 +96,7 @@
 
 
 	<script type="text/javascript" src="/libs/dialog-polyfill/dialog-polyfill.js"></script>	
+	<script type="text/javascript" src="/libs/notie/dist/notie.min.js"></script>
 	<script type="text/javascript">
 		
 	    var dialog = document.querySelector('dialog');
@@ -110,7 +112,42 @@
 	      dialog.close();
 	    });
 
+	    var tag = {
+            init : function() {
+                this.domCache()
+                this.bindEvents() 
+            },
 
+
+            domCache : function() {
+                this.title = $('#title')
+                this.imagefile = $('#imagefile')
+                this.submitBtn = $('#submitBtn')
+
+            },
+
+            bindEvents : function() {
+                this.submitBtn.on('click', _.bind(this.checkData, this))
+            },
+
+            checkData : function() {
+            	var me = this
+
+                if (is.empty(this.title.val())) {
+                    notie.alert('error', '标签名称不能为空', 5)
+                    return false
+                } else if (is.empty(this.imagefile.val())) {
+                    notie.alert('error', '必须为标签添加一张展示图片', 5)
+                    return false
+                }
+
+                setTimeout(function() {
+	                me.submitBtn.prop('disabled', true)
+                }, 0.002)
+            }	    	
+	    }
+
+	    tag.init()
 	</script>
 
 	{% endblock %}
