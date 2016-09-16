@@ -1,20 +1,16 @@
-{% extends "layout/layout.html" %} {% block body %}
+{% extends "layout/layout.html" %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/libs/notie/dist/notie.css">
+{% endblock %}
+
+{% block body %}
 <div class="login mdl-layout__content">
     <a href="/" style="display:block;margin:100px auto;width:100px;height:51px;">
         <img src="/images/logoDr.png" width=100 height=51 >
     </a>
     <div class="mdl-grid login-grid">
       <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet">
-        <div class="errorMessage">
-            {% if messages %} {% for message in messages %}
-            <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;
-                </button>
-                {{ message }}
-            </div>
-            {% endfor %} {% endif %}
-        </div>
-
             <form class="form-horizontal" method="POST" action="/login">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="email" name="email">
@@ -37,6 +33,7 @@
     </div>
 </div>
 {% endblock %} {% block script %}
+<script type="text/javascript" src="/libs/notie/dist/notie.min.js"></script>
 <script type="text/javascript">
 ;
 !(function() {
@@ -73,22 +70,31 @@
 
         checkData: function() {
             if (is.empty(this.email.val())) {
-                this.errorMessage.append(this.messageTpl('邮箱不能为空'))
+                notie.alert('error', '邮箱不能为空', 5)
                 return false
             } else if (!is.email(this.email.val())) {
-                this.errorMessage.append(this.messageTpl('您输入的邮箱格式不正确'))
+                notie.alert('error', '您输入的邮箱格式不正确', 5)
                 return false
             } else if (is.empty(this.password.val())) {
-                this.errorMessage.append(this.messageTpl('用户密码不能为空'))
+                notie.alert('error', '用户密码不能为空', 5)
                 return false
             } else if (!is.alphaNumeric(this.password.val()) || !is.within(this.password.val().length, 6, 12)) {
-                this.errorMessage.append(this.messageTpl('用户密码必须是6-12位的字母数字组成'))
+                notie.alert('error', '用户密码必须是6-12位的字母数字组成', 5)
                 return false
             }
         }
     }
 
     login.init()
+
+    var errorMessages = '{{ messages }}'
+    console.log(errorMessages)
+
+    if (errorMessages && errorMessages.length && errorMessages.length !== 0) {
+        notie.alert('error', errorMessages, 5)
+    }
+
+
 })();
 </script>
 {% endblock %}

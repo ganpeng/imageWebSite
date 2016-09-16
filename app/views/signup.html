@@ -1,5 +1,9 @@
 {% extends "layout/layout.html" %}
 
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/libs/notie/dist/notie.css">
+{% endblock %}
+
 {% block body %}
 
 <div class="login mdl-layout__content">
@@ -8,16 +12,6 @@
     </a>
     <div class="mdl-grid login-grid">
       <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet">
-        <div class="errorMessage">
-            {% if messages %} {% for message in messages %}
-            <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times;
-                </button>
-                {{ message }}
-            </div>
-            {% endfor %} {% endif %}
-        </div>
-
             <form class="form-horizontal" method="POST" action="/signUp">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="email" name="email">
@@ -48,87 +42,9 @@
     </div>
 </div>
 
-<!--
-    <div class="signUp">
-        <div class="row">
-        	<div class="errorMessage">
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-danger alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert"aria-hidden="true"> &times;
-                            </button>
-                            {{ message }}
-                        </div>   
-                    {% endfor %}
-                {% endif %}
-            </div>
-            <form class="form-horizontal" method="POST" action="/signUp">
-                <div class="form-group">
-                    <label for="email" class="control-label col-md-4">邮箱：</label>
-                    <div class="col-md-8">
-                        <input 
-                        type="text"
-                        class="form-control" 
-                        id="email" 
-                        name="email" 
-                        placeholder="请输入邮箱"
-                        value="{{ user.email }}"
-                        >
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="username" class="control-label col-md-4">用户名：</label>
-                    <div class="col-md-8">
-                        <input 
-                        type="text" 
-                        class="form-control" 
-                        id="username" 
-                        name="username" 
-                        placeholder="请输入用户名"
-                        value="{{ user.username }}"
-                        >
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="control-label col-md-4">密码：</label>
-                    <div class="col-md-8">
-                        <input 
-                        type="password" 
-                        class="form-control" 
-                        id="password" 
-                        name="password" 
-                        placeholder="请输入密码"
-                        value="{{ user.password }}"
-                        >
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword" class="control-label col-md-4">
-                        确认密码：
-                    </label>
-                    <div class="col-md-8">
-                        <input 
-                        type="password" 
-                        class="form-control" 
-                        id="confirmPassword" 
-                        name="confirmPassword" 
-                        placeholder="请输入确认密码"
-                        value="{{ user.confirmPassword }}"
-                        >
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-8 col-md-offset-4">
-                        <button class="btn btn-primary" type="submit" id="submitBtn">注册</button>
-                        <a href="/login" class="signLink pull-right">登录</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
--->
 {% endblock %}
 {% block script %}
+<script type="text/javascript" src="/libs/notie/dist/notie.min.js"></script>
 <script type="text/javascript">
     
     ;!(function() {
@@ -167,34 +83,41 @@
 
             checkData : function() {
                 if (is.empty(this.email.val())) {
-                    this.errorMessage.append(this.messageTpl('邮箱不能为空'))
+                    notie.alert('error', '邮箱不能为空', 5)
                     return false
                 } else if (!is.email(this.email.val())) {
-                    this.errorMessage.append(this.messageTpl('您输入的邮箱格式不正确'))
+                    notie.alert('error', '您输入的邮箱格式不正确', 5)
                     return false
                 } else if (is.empty(this.username.val())) {
-                    this.errorMessage.append(this.messageTpl('用户名不能为空'))
+                    notie.alert('error', '用户名不能为空', 5)
                     return false
                 } else if (!is.alphaNumeric(this.username.val()) || !is.within(this.username.val().length, 6, 12)) {
-                    this.errorMessage.append(this.messageTpl('用户名必须是6-12位的字母数字组成'))
+                    notie.alert('error', '用户名必须是6-12位的字母数字组成', 5)
                     return false
                 } else if (is.empty(this.password.val())) {
-                    this.errorMessage.append(this.messageTpl('用户密码不能为空'))
+                    notie.alert('error', '用户密码不能为空', 5)
                     return false
                 } else if (!is.alphaNumeric(this.password.val()) || !is.within(this.password.val().length, 6, 12)) {
-                    this.errorMessage.append(this.messageTpl('用户密码必须是6-12位的字母数字组成'))
+                    notie.alert('error', '用户密码必须是6-12位的字母数字组成', 5)
                     return false
                 } else if (is.empty(this.confirmPassword.val())) {
-                    this.errorMessage.append(this.messageTpl('用户确认密码不能为空'))
+                    notie.alert('error', '用户确认密码不能为空', 5)
                     return false
                 } else if (!is.equal(this.password.val(), this.confirmPassword.val())) {
-                    this.errorMessage.append(this.messageTpl('确认密码和密码不相同'))
+                    notie.alert('error', '确认密码和密码不相同', 5)
                     return false
                 }
             }
         }
 
        signUp.init() 
+
+        var errorMessages = '{{ messages }}'
+        console.log(errorMessages)
+
+        if (errorMessages && errorMessages.length && errorMessages.length !== 0) {
+            notie.alert('error', errorMessages, 5)
+        }      
 
     })();
 </script>
